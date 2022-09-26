@@ -8,4 +8,5 @@ stats = pd.read_excel(
               ]
     )
 
-stats.to_json('./data/stats.json', orient='records')
+
+#stats.to_json('./data/stats.json', orient='records')
