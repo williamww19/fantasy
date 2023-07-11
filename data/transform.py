@@ -1,12 +1,17 @@
 import pandas as pd
+import os
 
-stats = pd.read_excel(
-    './2021/BBM_PlayerRankings.xls', 
-    usecols= ['Own', 'Round', 'Rank', 'Name', 'Team', 'Pos', 'USG', 
-              #'g', 'm/g', 'p/g', '3/g', 'r/g', 'a/g', 's/g', 'b/g', 'fg%', 'fga/g', 'ft%', 'fta/g', 'or/g', 'to/g', 
-              #'ato', 'pV', '3V', 'rV', 'aV', 'sV', 'bV', 'fg%V', 'ft%V', 'orV', 'toV', 'atoV'
-              ]
-    )
+# Loop through each file in the directory
+combined_df = pd.concat(
+    [
+        pd.read_excel(f'./data/weekly_stats/{file}') for file in os.listdir('./data/weekly_stats')
+    ],
+    ignore_index=True
+)
 
+combined_df['Week'] = combined_df['Week'].astype(str)
 
-#stats.to_json('./data/stats.json', orient='records')
+js_string = f"var weekly_stats = {combined_df.to_dict('records')}"
+
+with open('./static/js/data.js', 'w') as f:
+    f.write(js_string)
