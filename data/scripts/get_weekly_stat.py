@@ -3,7 +3,7 @@ import yahoo_fantasy_api as yfa
 import pandas as pd
 
 # connect to yahoo api
-oauth = OAuth2(None, None, from_file='./data/access_key.json')
+oauth = OAuth2(None, None, from_file='./secret/access_key.json')
 
 if not oauth.token_is_valid():
     oauth.refresh_access_token()
