@@ -21,7 +21,9 @@ function buildTable(data) {
         cell.text(val);
         });
     });
-  }
+    // Call your function with the table ID as an argument
+    applyColorScaleToTable('weekly_stats');
+};
 
 // Create a variable to keep track of all the filters as an object.
 var filters = {};
@@ -58,6 +60,52 @@ function filterTable() {
   })
   buildTable(filteredData);
 };
+
+// Define your function
+function applyColorScaleToTable(tableId) {
+  // Define the color scale
+  var colorScale = d3.scaleLinear().domain([0, 10, 100]).range(['#769FCA', 'white', '#FF6C65']);
+
+  // Get the table element by ID
+  var table = document.getElementById(tableId);
+  
+  // Get all the cells in the table
+  var cells = table.querySelectorAll('table td');
+
+  // Get the number of columns in the table
+  var numColumns = document.querySelectorAll('table tr:first-child td').length;
+
+  // Loop through each column
+  for (var i = 0; i < numColumns; i++) {
+  // Get all the cells in the column
+      var columnIndex = document.querySelectorAll('table th')[i].textContent.trim();
+
+      if ( columnIndex != 'Team' && columnIndex != 'FGM/A' && columnIndex != 'FTM/A' && columnIndex != 'Week' && columnIndex != 'GP') {
+        var columnCells = document.querySelectorAll('table td:nth-child(' + (i + 1) + ')');
+        
+        // Get the values of the cells in the column
+        var values = [];
+        columnCells.forEach(function(cell) {
+          values.push(cell.textContent.trim());
+        });
+        
+        // Compute the domain of the color scale based on the values in the column
+        if ( columnIndex != 'TO' ) {
+          var domain = [d3.min(values), d3.mean(values), d3.max(values)];
+        }
+        else {
+          var domain = [d3.max(values), d3.mean(values), d3.min(values)];
+        }
+        colorScale.domain(domain);
+        
+        // Set the background color of each cell in the column based on its value
+        columnCells.forEach(function(cell) {
+          cell.style.backgroundColor = colorScale(cell.textContent.trim());
+        });
+      };
+  }
+}  
+
 
 // Attach an event to listen for changes to each filter
 d3.selectAll("input").on("change", updateFilters);
