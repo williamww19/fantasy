@@ -22,7 +22,7 @@ function buildTable(data) {
         });
     });
     // Call your function with the table ID as an argument
-    applyColorScaleToTable('weekly_stats');
+    applyColorScaleToTable('weekly-stats');
 };
 
 // Create a variable to keep track of all the filters as an object.
@@ -70,18 +70,18 @@ function applyColorScaleToTable(tableId) {
   var table = document.getElementById(tableId);
   
   // Get all the cells in the table
-  var cells = table.querySelectorAll('table td');
+  var cells = table.querySelectorAll('td');
 
   // Get the number of columns in the table
-  var numColumns = document.querySelectorAll('table tr:first-child td').length;
+  var numColumns = table.querySelectorAll('tr:first-child td').length;
 
   // Loop through each column
   for (var i = 0; i < numColumns; i++) {
   // Get all the cells in the column
-      var columnIndex = document.querySelectorAll('table th')[i].textContent.trim();
+      var columnIndex = table.querySelectorAll('th')[i].textContent.trim();
 
       if ( columnIndex != 'Team' && columnIndex != 'FGM/A' && columnIndex != 'FTM/A' && columnIndex != 'Week' && columnIndex != 'GP') {
-        var columnCells = document.querySelectorAll('table td:nth-child(' + (i + 1) + ')');
+        var columnCells = table.querySelectorAll('td:nth-child(' + (i + 1) + ')');
         
         // Get the values of the cells in the column
         var values = [];
