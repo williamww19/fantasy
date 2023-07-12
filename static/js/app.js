@@ -86,7 +86,7 @@ function applyColorScaleToTable(tableId) {
         // Get the values of the cells in the column
         var values = [];
         columnCells.forEach(function(cell) {
-          values.push(cell.textContent.trim());
+          values.push(Number(cell.textContent.trim()));
         });
         
         // Compute the domain of the color scale based on the values in the column
@@ -100,12 +100,11 @@ function applyColorScaleToTable(tableId) {
         
         // Set the background color of each cell in the column based on its value
         columnCells.forEach(function(cell) {
-          cell.style.backgroundColor = colorScale(cell.textContent.trim());
+          cell.style.backgroundColor = colorScale(Number(cell.textContent.trim()));
         });
       };
   }
 }  
-
 
 // Attach an event to listen for changes to each filter
 d3.selectAll("input").on("change", updateFilters);
