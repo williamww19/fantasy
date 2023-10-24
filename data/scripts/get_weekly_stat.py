@@ -2,6 +2,7 @@ from yahoo_oauth import OAuth2
 import yahoo_fantasy_api as yfa
 import pandas as pd
 
+
 # connect to yahoo api
 oauth = OAuth2(None, None, from_file='./secret/access_key.json')
 
@@ -10,10 +11,32 @@ if not oauth.token_is_valid():
 
 handler = yfa.yhandler.YHandler(oauth)
 
-settings = handler.sc.session.get('https://fantasysports.yahooapis.com/fantasy/v2/league/418.l.19600/settings', params={'format':'json'})
 
-for week in range(1, 25):
-    weekly_stats = handler.get_scoreboard_raw('418.l.19600', week=week)
+def get_game_key(handler=handler) -> int:
+    response = handler.sc.session.get('https://fantasysports.yahooapis.com/fantasy/v2/game/nba',
+                                      params={'format': 'json'})
+    response_json = response.json()
+    game_key = response_json['fantasy_content']['game'][0]['game_key']
+    return game_key
+
+
+game_key = get_game_key()
+
+
+def get_current_week(handler=handler) -> int:
+    response = handler.sc.session.get(f'https://fantasysports.yahooapis.com/fantasy/v2/league/{game_key}.l.{league_id}', params={'format':'json'})
+    response_json = response.json()
+    current_week = response_json['fantasy_content']['league'][0]['current_week']
+    return current_week
+
+
+league_id = 6315
+current_week = get_current_week()
+
+settings = handler.sc.session.get(f'https://fantasysports.yahooapis.com/fantasy/v2/league/{game_key}.l.{league_id}/settings', params={'format':'json'})
+
+for week in range(1, current_week+1):
+    weekly_stats = handler.get_scoreboard_raw(f'{game_key}.l.{league_id}', week=week)
     
     dict_stat_id = {}
     for stat in settings.json()['fantasy_content']['league'][1]['settings'][0]['stat_categories']['stats']:
