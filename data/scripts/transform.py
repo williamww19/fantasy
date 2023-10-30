@@ -2,12 +2,14 @@ import pandas as pd
 import os
 
 
-def transform_data() -> None:
-    print('---- transforming data to json ----')
+def transform_data(league_id) -> None:
+    print(f'---- transforming data to json for {league_id} ----')
     # Loop through each file in the directory
+    file_dir = f'./data/league_{league_id}/weekly_stats'
     combined_df = pd.concat(
         [
-            pd.read_csv(f'./data/weekly_stats/{file}', encoding='utf-8') for file in os.listdir('./data/weekly_stats')
+            pd.read_csv(os.path.join(file_dir, file), encoding='utf-8') for file in
+            os.listdir(file_dir)
         ],
         ignore_index=True
     )
@@ -16,5 +18,5 @@ def transform_data() -> None:
 
     js_string = f"var weekly_stats = {combined_df.to_dict('records')}"
 
-    with open('./static/js/data.js', 'w', encoding='utf-8') as f:
+    with open(f'./static/js/data_{league_id}.js', 'w', encoding='utf-8') as f:
         f.write(js_string)
