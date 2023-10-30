@@ -64,5 +64,6 @@ class YfaDataLoad(object):
                             df_weekly_stats = pd.concat([df_weekly_stats, pd.DataFrame.from_dict(team_stat, orient='index', columns=[0]).T])
 
             df_weekly_stats['Week'] = week
+            df_weekly_stats = df_weekly_stats.replace('', '/')
             df_weekly_stats = df_weekly_stats.reset_index(drop=True)
             df_weekly_stats.to_csv(f"./data/weekly_stats/week_{str(week).rjust(2, '0')}.csv", index=False)

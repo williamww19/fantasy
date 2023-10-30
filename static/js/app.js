@@ -100,7 +100,10 @@ function applyColorScaleToTable(tableId) {
         
         // Set the background color of each cell in the column based on its value
         columnCells.forEach(function(cell) {
-          cell.style.backgroundColor = colorScale(Number(cell.textContent.trim()));
+          var cellValue = Number(cell.textContent.trim());
+          if (!isNaN(cellValue)) { // Check if the cell's content is a valid number
+            cell.style.backgroundColor = colorScale(Number(cell.textContent.trim()));
+          }
         });
       };
   }
