@@ -14,55 +14,20 @@
 </head>
 <body class="bg-light text-dark">
     <div class="wrapper">
-        <nav class="navbar navbar-expand-lg">
-            <a class="narbar-brand" href="index.html">WW's Fantasy</a>
-        </nav>
-        <div class="container-fluid">
-            <div class="row">
-            <div class="col-md-3">
-                <form>
-                    <p>Filter Search</p>
-                    <ul class="list-group">
-                        <li class="list-group-item bg-light text-dark">
-                            <label for="Week">Enter Week</label>
-                            <input type="text" placeholder="1" id="Week">
-                        </li>
-                        <li class="list-group-item bg-light text-dark">
-                            <label for="Team">Enter Team</label>
-                            <input type="text" placeholder="WW" id="Team">
-                        </li>
-                    </ul>
-                </form>
-            </div>
-            <div class="col-md-9">
-                <table class="table" id="weekly-stats">
-                    <thead>
-                        <tr>
-                            <th>Team</th>
-                            <th>FGM/A</th>
-                            <th>FG%</th>
-                            <th>FTM/A</th>
-                            <th>FT%</th>
-                            <th>3PTM</th>
-                            <th>PTS</th>
-                            <th>OREB</th>
-                            <th>REB</th>
-                            <th>AST</th>
-                            <th>ST</th>
-                            <th>BLK</th>
-                            <th>TO</th>
-                            <th>A/T</th>
-                            <th>GP</th>
-                            <th>Week</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </div>
+        <div>
+            <nav class="navbar navbar-expand-lg">
+                <a class="narbar-brand">William's Fantasy - pick your league: </a>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="zongguanjun.html" target="content-frame">ZongGuanJun</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="icecold.html" target="content-frame">IceCold</a>
+                    </li>
+                </ul>
+            </nav>
+            <iframe name="content-frame" src="zongguanjun.html" style="width: 100%; height: 100vh; border: none"></iframe>
         </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.11.0/d3.js"></script>
-    <script src="static/js/data.js"></script>
-    <script src="static/js/app.js"></script>
 </body>
 </html>

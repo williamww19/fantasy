@@ -35,7 +35,7 @@ class YfaDataLoad(object):
         return current_week
 
     def download_weekly_data(self) -> None:
-        print('---- downloading data ----')
+        print(f'----- downloading data for {self.league_id} -----')
         game_key = self.get_game_key()
         settings = self.get_settings(game_key, self.league_id)
         current_week = self.get_current_week(game_key, self.league_id)
@@ -49,7 +49,10 @@ class YfaDataLoad(object):
 
             matchups = weekly_stats['fantasy_content']['league'][1]['scoreboard']["0"]['matchups']
 
-            df_weekly_stats = pd.DataFrame(columns=['Team', 'FGM/A', 'FG%', 'FTM/A', 'FT%', '3PTM', 'PTS', 'OREB', 'REB', 'AST', 'ST', 'BLK', 'TO', 'A/T', 'GP'])
+            df_weekly_stats = pd.DataFrame(
+                columns=['Team', 'FGM/A', 'FG%', 'FTM/A', 'FT%', '3PTM', 'PTS', 'OREB', 'REB', 'AST', 'ST', 'BLK', 'TO',
+                         'A/T', 'GP']
+            )
 
             for matchup in matchups.keys():
                 if matchup != 'count':
@@ -66,4 +69,4 @@ class YfaDataLoad(object):
             df_weekly_stats['Week'] = week
             df_weekly_stats = df_weekly_stats.replace('', '/')
             df_weekly_stats = df_weekly_stats.reset_index(drop=True)
-            df_weekly_stats.to_csv(f"./data/weekly_stats/week_{str(week).rjust(2, '0')}.csv", index=False)
+            df_weekly_stats.to_csv(f"./data/league_{self.league_id}/weekly_stats/week_{str(week).rjust(2, '0')}.csv", index=False)
