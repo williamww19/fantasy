@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>少点毒奶，多点真诚</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous">
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body class="bg-light text-dark">
+    <div class="wrapper">
+        <div class="container-fluid">
+            <div class="row">
+            <div class="col-md-2">
+                <form>
+                    <p>Filter Search</p>
+                    <ul class="list-group">
+                        <li class="list-group-item bg-light text-dark">
+                            <label for="Week">Week</label>
+                            <input type="text" placeholder="1" id="Week">
+                        </li>
+                        <li class="list-group-item bg-light text-dark">
+                            <label for="Team">Team</label>
+                            <input type="text" placeholder="WW" id="Team">
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            <div class="col-md-10">
+                <table class="table" id="weekly-stats">
+                    <thead>
+                        <tr>
+                            <th>Team</th>
+                            <th>FGM/A</th>
+                            <th>FG%</th>
+                            <th>FTM/A</th>
+                            <th>FT%</th>
+                            <th>3PTM</th>
+                            <th>PTS</th>
+                            <th>OREB</th>
+                            <th>REB</th>
+                            <th>AST</th>
+                            <th>ST</th>
+                            <th>BLK</th>
+                            <th>TO</th>
+                            <th>A/T</th>
+                            <th>GP</th>
+                            <th>Week</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.11.0/d3.js"></script>
+    <script src="static/js/data_zongguanjun.js"></script>
+    <script src="static/js/app.js"></script>
+</body>
+</html>
