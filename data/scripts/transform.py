@@ -40,9 +40,11 @@ def create_weekly_summary(league_id):
         df_week_summary_pivot.to_csv(f'./data/league_{league_id}/weekly_summary/{file}')
 
 
-def compare_team_stats(df_week: pd.DataFrame, team_a: str, team_b: str) -> str:
+def compare_team_stats(df_week: pd.DataFrame, team_x: str, team_y: str) -> str:
     stats_col = ['FG%', 'FT%', '3PTM', 'PTS', 'OREB', 'REB', 'AST', 'ST', 'BLK', 'TO', 'A/T']
-    stats_comp = df_week.loc[df_week['Team'].isin([team_a, team_b]), stats_col].T
+    stats_team_x = df_week.loc[df_week['Team'] == team_x, stats_col]
+    stats_team_y = df_week.loc[df_week['Team'] == team_y, stats_col]
+    stats_comp = pd.concat([stats_team_x, stats_team_y]).T
     stats_comp.columns = ['Team_x', 'Team_y']
     win = ((stats_comp['Team_x'] - stats_comp['Team_y']) > 0).sum()
     tie = ((stats_comp['Team_x'] - stats_comp['Team_y']) == 0).sum()
