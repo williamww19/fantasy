@@ -6,7 +6,7 @@ rem Update main branch
 git pull
 
 rem Run Python script
-python main.py
+py main.py
 
 rem Add changes to Git
 git add .
