@@ -4,7 +4,7 @@ import pandas as pd
 
 
 def transform_data_to_json(league_id) -> None:
-    print(f'---- transforming data to json for {league_id} ----')
+    print(f'----- transforming data to json for {league_id} -----')
     # Loop through each file in the directory
     file_dir = f'./data/league_{league_id}/weekly_stats'
     combined_df = pd.concat(
@@ -24,7 +24,7 @@ def transform_data_to_json(league_id) -> None:
 
 
 def create_weekly_summary(league_id):
-    print(f'---- creating weekly summary for {league_id} ----')
+    print(f'----- creating weekly summary for {league_id} -----')
     file_dir = f'./data/league_{league_id}/weekly_stats'
     for file in os.listdir(file_dir):
         df_week = pd.read_csv(os.path.join(file_dir, file), encoding='utf-8')
