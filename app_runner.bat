@@ -6,7 +6,7 @@ rem Update main branch
 git pull
 
 rem Run Python script
-py main.py
+C:\Users\wylyy\Documents\Personal\Fantasy\webapp\venv\Scripts\python.exe C:\Users\wylyy\Documents\Personal\Fantasy\webapp\main.py
 
 rem Add changes to Git
 git add .
