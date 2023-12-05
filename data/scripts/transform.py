@@ -28,7 +28,9 @@ def create_weekly_summary(league_id):
     file_dir = f'./data/league_{league_id}/weekly_stats'
     for file in os.listdir(file_dir):
         df_week = pd.read_csv(os.path.join(file_dir, file), encoding='utf-8')
-        df_week.replace('/', 0, inplace=True)
+        df_week.replace('[/-]', 0, regex=True, inplace=True)
+        df_week[['FG%', 'FT%', '3PTM', 'PTS', 'OREB', 'REB', 'AST', 'ST', 'BLK', 'TO', 'A/T']] = \
+            df_week[['FG%', 'FT%', '3PTM', 'PTS', 'OREB', 'REB', 'AST', 'ST', 'BLK', 'TO', 'A/T']].astype(float)
         df_week['TO'] = -df_week['TO']
         df_week_summary = pd.merge(df_week['Team'], df_week['Team'], how='cross')
         df_week_summary = df_week_summary[df_week_summary['Team_x'] != df_week_summary['Team_y']]
