@@ -56,6 +56,6 @@ def compare_team_stats(df_week: pd.DataFrame, team_x: str, team_y: str) -> str:
 
 
 if __name__ == '__main__':
-    league_id = 6315
+    league_id = 13648
     transform_data_to_json(league_id=league_id)
     create_weekly_summary(league_id=league_id)
