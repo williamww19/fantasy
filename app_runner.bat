@@ -1,4 +1,4 @@
-@echo on
+@echo off
 
 rem Change directory to the webapp folder
 cd C:\Users\wylyy\Documents\Personal\Fantasy\webapp
