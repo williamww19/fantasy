@@ -1,4 +1,8 @@
-@echo off
+@echo on
+
+rem Change directory to the webapp folder
+cd C:\Users\wylyy\Documents\Personal\Fantasy\webapp
+
 rem Git change to main branch
 git checkout main
 
